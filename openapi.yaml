@@ -86,33 +86,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationOfferingSetDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
   '/educationOfferings/{sourcedId}':
     get:
       operationId: getEducationOffering
@@ -141,37 +127,23 @@ paths:
           schema:
             $ref: '#/definitions/SingleEducationOfferingDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     delete:
       operationId: deleteEducationOffering
       summary: The REST delete request message for the deleteEducationOffering() API call.
@@ -188,37 +160,23 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     put:
       operationId: putEducationOffering
       summary: The REST create request message for the putEducationOffering() API call.
@@ -243,33 +201,19 @@ paths:
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
   /educations:
     get:
       operationId: getAllEducations
@@ -332,33 +276,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationSetDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
   '/educations/{sourcedId}':
     get:
       operationId: getEducation
@@ -387,37 +317,23 @@ paths:
           schema:
             $ref: '#/definitions/SingleEducationDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     delete:
       operationId: deleteEducation
       summary: The REST delete request message for the deleteEducation() API call.
@@ -434,37 +350,23 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     put:
       operationId: putEducation
       summary: The REST create request message for the putEducation() API call.
@@ -489,33 +391,19 @@ paths:
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
   /offeringAssociations:
     get:
       operationId: getAllOfferingAssociations
@@ -578,33 +466,19 @@ paths:
           schema:
             $ref: '#/definitions/OfferingAssociationSetDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
   '/offeringAssociations/{sourcedId}':
     get:
       operationId: getOfferingAssociation
@@ -633,37 +507,23 @@ paths:
           schema:
             $ref: '#/definitions/SingleOfferingAssociationDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     delete:
       operationId: deleteOfferingAssociation
       summary: The REST delete request message for the deleteOfferingAssociation() API call.
@@ -680,37 +540,23 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '404':
           description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
     put:
       operationId: putOfferingAssociation
       summary: The REST create request message for the putOfferingAssociation() API call.
@@ -729,33 +575,49 @@ paths:
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
         '400':
-          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/BadRequest'
         '401':
-          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Unauthorized'
         '403':
-          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Forbidden'
         '422':
-          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/UnprocessableEntity'
         '429':
-          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/TooManyRequests'
         '500':
-          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/InternalServerError'
         default:
-          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/Default'
+parameters: {}
+responses:
+  InternalServerError:
+    description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  BadRequest:
+    description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  UnprocessableEntity:
+    description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  TooManyRequests:
+    description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  Unauthorized:
+    description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  Forbidden:
+    description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  Default:
+    description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
 definitions:
   EducationDType:
     description: ...tbd (Class description)...
