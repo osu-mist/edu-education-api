@@ -32,54 +32,11 @@ paths:
         - EducationOfferingsManagement
       description: ...not supplied...
       parameters:
-        - name: limit
-          in: query
-          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
-          required: false
-          type: integer
-          format: int32
-          default: 100
-          minimum: 1
-          allowEmptyValue: false
-        - name: offset
-          in: query
-          description: The number of the first record to be supplied in the segmented response message.
-          required: false
-          type: integer
-          format: int32
-          default: 0
-          minimum: 0
-          allowEmptyValue: false
-        - name: sort
-          in: query
-          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: orderBy
-          in: query
-          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          enum:
-            - asc
-            - desc
-          allowEmptyValue: false
-        - name: filter
-          in: query
-          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -112,15 +69,7 @@ paths:
           description: ...tbd...
           required: true
           type: string
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -222,54 +171,11 @@ paths:
         - EducationsManagement
       description: ...not supplied...
       parameters:
-        - name: limit
-          in: query
-          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
-          required: false
-          type: integer
-          format: int32
-          default: 100
-          minimum: 1
-          allowEmptyValue: false
-        - name: offset
-          in: query
-          description: The number of the first record to be supplied in the segmented response message.
-          required: false
-          type: integer
-          format: int32
-          default: 0
-          minimum: 0
-          allowEmptyValue: false
-        - name: sort
-          in: query
-          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: orderBy
-          in: query
-          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          enum:
-            - asc
-            - desc
-          allowEmptyValue: false
-        - name: filter
-          in: query
-          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -302,15 +208,7 @@ paths:
           description: ...tbd...
           required: true
           type: string
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -412,54 +310,11 @@ paths:
         - OfferingAssociationsManagement
       description: ...not supplied...
       parameters:
-        - name: limit
-          in: query
-          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
-          required: false
-          type: integer
-          format: int32
-          default: 100
-          minimum: 1
-          allowEmptyValue: false
-        - name: offset
-          in: query
-          description: The number of the first record to be supplied in the segmented response message.
-          required: false
-          type: integer
-          format: int32
-          default: 0
-          minimum: 0
-          allowEmptyValue: false
-        - name: sort
-          in: query
-          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: orderBy
-          in: query
-          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          enum:
-            - asc
-            - desc
-          allowEmptyValue: false
-        - name: filter
-          in: query
-          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
-          required: false
-          type: string
-          allowEmptyValue: false
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -492,15 +347,7 @@ paths:
           description: ...tbd...
           required: true
           type: string
-        - name: fields
-          in: query
-          description: To identify the range of fields that should be supplied in the response message.
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          allowEmptyValue: false
+        - $ref: '#/parameters/fields'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
@@ -588,7 +435,51 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-parameters: {}
+parameters:
+  limit:
+    name: page[limit]
+    in: query
+    description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
+    required: false
+    type: integer
+    format: int32
+    default: 100
+    minimum: 1
+    allowEmptyValue: false
+  offset:
+    name: page[offset]
+    in: query
+    description: The number of the first record to be supplied in the segmented response message.
+    required: false
+    type: integer
+    format: int32
+    default: 0
+    minimum: 0
+    allowEmptyValue: false
+  sort:
+    name: sort
+    in: query
+    description: 'Identifies the sort criteria to be used for the records in the response message. Order is ascending unless prefixed with a ''-'''
+    required: false
+    type: string
+    allowEmptyValue: false
+  filter:
+    name: filter
+    in: query
+    description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
+    required: false
+    type: string
+    allowEmptyValue: false
+  fields:
+    name: fields
+    in: query
+    description: To identify the range of fields that should be supplied in the response message.
+    required: false
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
+    allowEmptyValue: false
 responses:
   InternalServerError:
     description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
