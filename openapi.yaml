@@ -370,7 +370,7 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-  '/offeringAssociations/{id}':
+  /offeringAssociations/{id}:
     get:
       operationId: getOfferingAssociation
       summary: The REST read request message for the getOfferingAssociation() API call.
