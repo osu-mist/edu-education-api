@@ -41,7 +41,7 @@ paths:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/EducationOfferingsResult'
+            $ref: '#/definitions/EducationOfferingSetResult'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -654,7 +654,7 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/EducationOfferingResource'
-  EducationOfferingsResult:
+  EducationOfferingSetResult:
     type: object
     required:
       - data
