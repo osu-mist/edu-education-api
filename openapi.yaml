@@ -41,7 +41,7 @@ paths:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/EducationOfferingSetDType'
+            $ref: '#/definitions/EducationOfferingsResult'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -56,7 +56,7 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-  '/educationOfferings/{sourcedId}':
+  '/educationOfferings/{id}':
     get:
       operationId: getEducationOffering
       summary: The REST read request message for the getEducationOffering() API call.
@@ -64,11 +64,7 @@ paths:
         - EducationOfferingsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationOfferingId'
         - $ref: '#/parameters/fields'
       responses:
         '200':
@@ -100,11 +96,7 @@ paths:
         - EducationOfferingsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationOfferingId'
       responses:
         '204':
           description: ...tbd (Response description)...
@@ -133,11 +125,7 @@ paths:
         - EducationOfferingsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationOfferingId'
         - name: educationOffering
           in: body
           description: ...tbd...
@@ -195,7 +183,7 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-  '/educations/{sourcedId}':
+  '/educations/{id}':
     get:
       operationId: getEducation
       summary: The REST read request message for the getEducation() API call.
@@ -203,11 +191,7 @@ paths:
         - EducationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationId'
         - $ref: '#/parameters/fields'
       responses:
         '200':
@@ -239,11 +223,7 @@ paths:
         - EducationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationId'
       responses:
         '204':
           description: ...tbd (Response description)...
@@ -272,11 +252,7 @@ paths:
         - EducationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/educationId'
         - name: education
           in: body
           description: ...tbd...
@@ -334,7 +310,7 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-  '/offeringAssociations/{sourcedId}':
+  '/offeringAssociations/{id}':
     get:
       operationId: getOfferingAssociation
       summary: The REST read request message for the getOfferingAssociation() API call.
@@ -342,11 +318,7 @@ paths:
         - OfferingAssociationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/offeringAssociationId'
         - $ref: '#/parameters/fields'
       responses:
         '200':
@@ -378,11 +350,7 @@ paths:
         - OfferingAssociationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/offeringAssociationId'
       responses:
         '204':
           description: ...tbd (Response description)...
@@ -411,11 +379,7 @@ paths:
         - OfferingAssociationsManagement
       description: ...not supplied...
       parameters:
-        - name: sourcedId
-          in: path
-          description: ...tbd...
-          required: true
-          type: string
+        - $ref: '#/parameters/offeringAssociationId'
       responses:
         '201':
           description: ...tbd (Response description)...
@@ -480,6 +444,24 @@ parameters:
       type: string
     collectionFormat: csv
     allowEmptyValue: false
+  educationOfferingId:
+    name: id
+    in: path
+    description: ...tbd...
+    required: true
+    type: string
+  educationId:
+    name: id
+    in: path
+    description: ...tbd...
+    required: true
+    type: string
+  offeringAssociationId:
+    name: id
+    in: path
+    description: ...tbd...
+    required: true
+    type: string
 responses:
   InternalServerError:
     description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
@@ -577,89 +559,157 @@ definitions:
       - organization
       - educationType
     additionalProperties: false
-  EducationOfferingDType:
+  EducationOfferingResource:
     description: ...tbd (Class description)...
     type: object
+    required: [type, id]
     properties:
-      sourcedId:
+      # new field
+      type: &EducationOfferingType
+        type: string
+        enum: [educationOffering]
+      # sourcedId -> id
+      id: &EducationOfferingId
+        type: string
         description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
-        type: string
-      status:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - active
-          - tobedeleted
-      dateLastModified:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      metadata:
-        $ref: '#/definitions/MetadataDType'
-      title:
-        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
-        type: string
-      offeringCode:
-        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
-        type: string
-      location:
-        description: ...tbd (ComplexType property description)...
-        type: array
-        minItems: 0
-        items:
-          $ref: '#/definitions/GUIDRefDType'
-      org:
-        $ref: '#/definitions/GUIDRefDType'
-      academicSession:
-        $ref: '#/definitions/GUIDRefDType'
-      education:
-        $ref: '#/definitions/GUIDRefDType'
-      registrationStatus:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - open
-          - closed
-          - pending
-          - waitlist
-      startDate:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      endDate:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      offeringFormat:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - online
-          - blended
-          - onground
-    required:
-      - sourcedId
-      - status
-      - dateLastModified
-      - title
-      - offeringCode
-      - org
-      - academicSession
-      - education
-      - registrationStatus
-      - offeringFormat
-    additionalProperties: false
-  EducationOfferingSetDType:
-    description: ...tbd (Class description)...
+      # all other fields besides sourcedId moved to attributes object
+      attributes:
+        type: object
+        # Made all fields required. This prevents clients from having to strictly check that all
+        # fields exist before accessing them.
+        required:
+          - status
+          - dateLastModified
+          - metadata
+          - title
+          - offeringCode
+          - location
+          - org
+          - academicSession
+          - education
+          - registrationStatus
+          - startDate
+          - endDate
+          - offeringFormat
+        additionalProperties: false
+        properties: &EducationOfferingAttributesProperties
+          status:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - active
+              - tobedeleted
+          dateLastModified:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          metadata:
+            $ref: '#/definitions/MetadataDType'
+          title:
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            type: string
+          offeringCode:
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            type: string
+          location:
+            description: ...tbd (ComplexType property description)...
+            type: array
+            minItems: 0
+            items:
+              $ref: '#/definitions/GUIDRefDType'
+          org:
+            $ref: '#/definitions/GUIDRefDType'
+          academicSession:
+            $ref: '#/definitions/GUIDRefDType'
+          education:
+            $ref: '#/definitions/GUIDRefDType'
+          registrationStatus:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - open
+              - closed
+              - pending
+              - waitlist
+          startDate:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          endDate:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          offeringFormat:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - online
+              - blended
+              - onground
+  EducationOfferingResult:
     type: object
-    properties:
-      educationOfferingSet:
-        description: ...tbd (ComplexType property description)...
-        type: array
-        minItems: 0
-        items:
-          $ref: '#/definitions/EducationOfferingDType'
+    required:
+      - data
     additionalProperties: false
+    properties:
+      data:
+        $ref: '#/definitions/EducationOfferingResource'
+  EducationOfferingsResult:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/EducationOfferingResource'
+  EducationOfferingPostBody:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: object
+        required:
+          - type
+          - attributes
+        properties:
+          type: *EducationOfferingType
+          attributes:
+            type: object
+            # required fields taken from original required fields
+            required:
+              - sourcedId
+              - status
+              - dateLastModified
+              - title
+              - offeringCode
+              - org
+              - academicSession
+              - education
+              - registrationStatus
+              - offeringFormat
+            properties: *EducationOfferingAttributesProperties
+  EducationOfferingPatchBody:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: object
+        required:
+          - type
+          - id
+          - attributes
+        properties:
+          type: *EducationOfferingType
+          id: *EducationOfferingId
+          attributes:
+            type: object
+            properties: *EducationOfferingAttributesProperties
   EducationSetDType:
     description: ...tbd (Class description)...
     type: object
@@ -804,7 +854,7 @@ definitions:
     type: object
     properties:
       educationOffering:
-        $ref: '#/definitions/EducationOfferingDType'
+        $ref: '#/definitions/EducationOfferingResource'
     required:
       - educationOffering
     additionalProperties: false
