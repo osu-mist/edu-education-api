@@ -56,7 +56,39 @@ paths:
           $ref: '#/responses/InternalServerError'
         default:
           $ref: '#/responses/Default'
-  '/educationOfferings/{id}':
+    post:
+      operationId: postEducationOffering
+      summary: The REST create request message for the postEducationOffering() API call.
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - name: requestBody
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/EducationOfferingPostBody'
+      responses:
+        '201':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '422':
+          $ref: '#/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/responses/TooManyRequests'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+  /educationOfferings/{id}:
     get:
       operationId: getEducationOffering
       summary: The REST read request message for the getEducationOffering() API call.
@@ -70,7 +102,7 @@ paths:
         '200':
           description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/SingleEducationOfferingDType'
+            $ref: '#/definitions/EducationOfferingResult'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -78,9 +110,42 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/responses/TooManyRequests'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+    patch:
+      operationId: patchEducationOfferingById
+      summary: The REST update request message for the patchEducationOfferingById() API call.
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/educationOfferingId'
+        - name: requestBody
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/EducationOfferingPatchBody'
+      responses:
+        '200':
+          description: ...tbd (Response description)...
           schema:
             $ref: '#/definitions/imsx_StatusInfoDType'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+        '403':
+          $ref: '#/responses/Forbidden'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -90,7 +155,7 @@ paths:
         default:
           $ref: '#/responses/Default'
     delete:
-      operationId: deleteEducationOffering
+      operationId: deleteEducationOfferingById
       summary: The REST delete request message for the deleteEducationOffering() API call.
       tags:
         - EducationOfferingsManagement
@@ -107,42 +172,7 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
-        '422':
-          $ref: '#/responses/UnprocessableEntity'
-        '429':
-          $ref: '#/responses/TooManyRequests'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        default:
-          $ref: '#/responses/Default'
-    put:
-      operationId: putEducationOffering
-      summary: The REST create request message for the putEducationOffering() API call.
-      tags:
-        - EducationOfferingsManagement
-      description: ...not supplied...
-      parameters:
-        - $ref: '#/parameters/educationOfferingId'
-        - name: educationOffering
-          in: body
-          description: ...tbd...
-          required: true
-          schema:
-            $ref: '#/definitions/SingleEducationOfferingDType'
-      responses:
-        '201':
-          description: ...tbd (Response description)...
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -205,9 +235,7 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -234,9 +262,7 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -332,9 +358,7 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -361,9 +385,7 @@ paths:
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
+          $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -485,6 +507,10 @@ responses:
       $ref: '#/definitions/imsx_StatusInfoDType'
   Forbidden:
     description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    schema:
+      $ref: '#/definitions/imsx_StatusInfoDType'
+  NotFound:
+    description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
     schema:
       $ref: '#/definitions/imsx_StatusInfoDType'
   Default:
@@ -848,15 +874,6 @@ definitions:
         $ref: '#/definitions/EducationDType'
     required:
       - education
-    additionalProperties: false
-  SingleEducationOfferingDType:
-    description: ...tbd (Class description)...
-    type: object
-    properties:
-      educationOffering:
-        $ref: '#/definitions/EducationOfferingResource'
-    required:
-      - educationOffering
     additionalProperties: false
   SingleOfferingAssociationDType:
     description: ...tbd (Class description)...
