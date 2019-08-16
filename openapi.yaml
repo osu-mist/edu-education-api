@@ -640,6 +640,7 @@ definitions:
     required:
       - type
       - id
+      - meta
       - attributes
     properties:
       # new field
@@ -650,6 +651,9 @@ definitions:
       id: &EducationId
         type: string
         description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+      # metadata -> meta
+      meta:
+        $ref: '#/definitions/MetadataDType'
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
@@ -658,7 +662,6 @@ definitions:
         required:
           - status
           - dateLastModified
-          - metadata
           - title
           - code
           - organization
@@ -681,8 +684,6 @@ definitions:
             description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
             type: string
             format: date-time
-          metadata:
-            $ref: '#/definitions/MetadataDType'
           title:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
@@ -794,6 +795,7 @@ definitions:
     required:
       - type
       - id
+      - meta
       - attributes
     properties:
       # new field
@@ -804,6 +806,9 @@ definitions:
       id: &EducationOfferingId
         type: string
         description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+      # metadata -> meta
+      meta:
+        $ref: '#/definitions/MetadataDType'
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
@@ -812,7 +817,6 @@ definitions:
         required:
           - status
           - dateLastModified
-          - metadata
           - title
           - offeringCode
           - location
@@ -835,8 +839,6 @@ definitions:
             description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
             type: string
             format: date-time
-          metadata:
-            $ref: '#/definitions/MetadataDType'
           title:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
@@ -950,6 +952,7 @@ definitions:
     required:
       - type
       - id
+      - meta
       - attributes
     additionalProperties: false
     properties:
@@ -959,12 +962,14 @@ definitions:
       id: &OfferingAssociationId
         type: string
         description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+      # metadata -> meta
+      meta:
+        $ref: '#/definitions/MetadataDType'
       attributes:
         type: object
         required:
           - status
           - dateLastModified
-          - metadata
           - personId
           - educationOfferingId
           - role
@@ -983,8 +988,6 @@ definitions:
             description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
             type: string
             format: date-time
-          metadata:
-            $ref: '#/definitions/MetadataDType'
           personId:
             $ref: '#/definitions/GUIDRefDType'
           educationOfferingId:
