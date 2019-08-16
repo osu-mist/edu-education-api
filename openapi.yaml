@@ -88,6 +88,11 @@ paths:
           description: ...tbd (Response description)...
           schema:
             $ref: '#/definitions/EducationOfferingResult'
+          headers:
+            Location:
+              type: string
+              format: uri
+              description: Location of the newly created resource
         '400':
           $ref: '#/responses/400'
         '401':
@@ -253,6 +258,11 @@ paths:
           description: ...tbd (Response description)...
           schema:
             $ref: '#/definitions/EducationResult'
+          headers:
+            Location:
+              type: string
+              format: uri
+              description: Location of the newly created resource
         '400':
           $ref: '#/responses/400'
         '401':
@@ -418,6 +428,11 @@ paths:
           description: ...tbd (Response description)...
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
+          headers:
+            Location:
+              type: string
+              format: uri
+              description: Location of the newly created resource
         '400':
           $ref: '#/responses/400'
         '401':
@@ -1164,7 +1179,7 @@ definitions:
         properties:
           about:
             type: string
-            format: url
+            format: uri
             description: A link to further information about the error
             example: https://developer.oregonstate.edu/documentation/error-reference#1234
   ErrorResult:
