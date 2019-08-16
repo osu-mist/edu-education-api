@@ -791,7 +791,6 @@ definitions:
             type: object
             # required fields taken from original required fields
             required:
-              - sourcedId
               - status
               - dateLastModified
               - title
@@ -945,7 +944,6 @@ definitions:
             type: object
             # required fields taken from original required fields
             required:
-              - sourcedId
               - status
               - dateLastModified
               - title
@@ -1081,7 +1079,6 @@ definitions:
             type: object
             # required fields taken from original required fields
             required:
-              - sourcedId
               - status
               - dateLastModified
               - personId
