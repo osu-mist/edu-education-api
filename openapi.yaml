@@ -2,8 +2,16 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: EDU-API OpenAPI (JSON) Definition
-  description: The EDU-API Education 1.0 service binding is available in REST/JSON. The model is based upon the IMS PSM modelling approach.
-  termsOfService: 'Permission is granted to all parties to use excerpts from this document as needed in producing requests for proposals. The limited permissions granted above are perpetual and will not be revoked by IMS or its successors or assigns. THIS API DEFINITION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NONINFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS SPECIFICATION SHALL BE MADE ENTIRELY AT THE IMPLEMENTERS OWN RISK, AND NEITHER THE  CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER,  DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS API DEFINITION.'
+  description: The EDU-API Education 1.0 service binding is available in REST/JSON. The model is
+    based upon the IMS PSM modelling approach.
+  termsOfService: 'Permission is granted to all parties to use excerpts from this document as needed
+    in producing requests for proposals. The limited permissions granted above are perpetual and
+    will not be revoked by IMS or its successors or assigns. THIS API DEFINITION IS BEING OFFERED
+    WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NONINFRINGEMENT IS EXPRESSLY
+    DISCLAIMED. ANY USE OF THIS SPECIFICATION SHALL BE MADE ENTIRELY AT THE IMPLEMENTERS OWN RISK,
+    AND NEITHER THE  CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY
+    WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER,  DIRECTLY
+    OR INDIRECTLY, ARISING FROM THE USE OF THIS API DEFINITION.'
   contact:
     name: 'Lisa Mattson (COO), IMS Global '
     url: 'http://www.imsglobal.org'
@@ -23,6 +31,10 @@ tags:
     description: No description supplied.
   - name: OfferingAssociationsManagement
     description: No description supplied.
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
   /educationOfferings:
     get:
@@ -39,7 +51,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a collection has been returned.
+            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
+            a REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingSetResult'
         '400':
@@ -100,7 +114,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
+            REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
@@ -196,7 +212,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a collection has been returned.
+            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
+            a REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationSetResult'
         '400':
@@ -257,7 +275,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
+            REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
@@ -353,7 +373,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a collection has been returned.
+            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
+            a REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationSetResult'
         '400':
@@ -414,7 +436,9 @@ paths:
         - $ref: '#/parameters/fields'
       responses:
         '200':
-          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
+            REST binding a HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
@@ -499,7 +523,8 @@ parameters:
   limit:
     name: page[limit]
     in: query
-    description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
+    description: To define the download segmentation value i.e. the maximum number of records to be
+      contained in the response.
     required: false
     type: integer
     format: int32
@@ -519,14 +544,16 @@ parameters:
   sort:
     name: sort
     in: query
-    description: 'Identifies the sort criteria to be used for the records in the response message. Order is ascending unless prefixed with a ''-'''
+    description: 'Identifies the sort criteria to be used for the records in the response message.
+    Order is ascending unless prefixed with a ''-'''
     required: false
     type: string
     allowEmptyValue: false
   filter:
     name: filter
     in: query
-    description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
+    description: 'The filtering rules to be applied when identifying the records to be supplied in
+    the response message. The sort order should follow the [UNICODE, 16] standard.'
     required: false
     type: string
     allowEmptyValue: false
@@ -560,37 +587,52 @@ parameters:
     type: string
 responses:
   InternalServerError:
-    description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'This code should be used only if there is catastrophic error and there is not a
+    more appropriate code i.e. ''internal_server_error''. This would be accompanied by the
+    ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   BadRequest:
-    description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'Either an invalid selection field or invalid filter selection was supplied and
+    data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or
+    ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values
+    of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   UnprocessableEntity:
-    description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'This error condition may occur if a JSON request body contains well-formed (i.e.
+    syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied
+    by the ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   TooManyRequests:
-    description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later
+    time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   Unauthorized:
-    description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would
+    be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   Forbidden:
-    description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'This is used to indicate that the server can be reached and process the request
+    but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the
+    ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   NotFound:
-    description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+    description: 'Either the supplied identifier is unknown in the Service Provider and so the
+    object could not be changed or an invalid GUID has been supplied. This would be accompanied by
+    the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should
+    also be presented. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
   Default:
-    description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+    description: 'This is the default error response when no other appropriate code is available.
+    This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
     schema:
-      $ref: '#/definitions/imsx_StatusInfoDType'
+      $ref: '#/definitions/ErrorResult'
 definitions:
   EducationResource:
     description: ...tbd (Class description)...
@@ -642,10 +684,12 @@ definitions:
           metadata:
             $ref: '#/definitions/MetadataDType'
           title:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           code:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           organization:
             $ref: '#/definitions/GUIDRefDType'
@@ -672,13 +716,16 @@ definitions:
             description: Model Primitive Datatype = String. ...tbd (PrimitiveType description)...
             type: string
           courseType:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           educationType:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           gradingScheme:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
   EducationResult:
     type: object
@@ -791,10 +838,12 @@ definitions:
           metadata:
             $ref: '#/definitions/MetadataDType'
           title:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           offeringCode:
-            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+            description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+              description)...
             type: string
           location:
             description: ...tbd (ComplexType property description)...
@@ -1057,7 +1106,8 @@ definitions:
     type: object
     properties:
       format:
-        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
+          description)...
         type: string
       startDate:
         description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
@@ -1077,73 +1127,33 @@ definitions:
     type: object
     properties: {}
     additionalProperties: true
-  imsx_CodeMinorDType:
-    description: This is the container for the set of code minor status codes reported in the responses from the Service Provider.
-    type: object
+  ErrorObject:
     properties:
-      imsx_codeMinorField:
-        description: Each reported code minor status code.
+      status:
+        type: string
+        description: HTTP status code
+        example: '123'
+      title:
+        type: string
+        description: A short, user readable summary of the error
+        example: Not Found
+      code:
+        type: string
+        description: An application-specific error code
+        example: '1234'
+      detail:
+        type: string
+        description: A long description of the error that may contain instance-specific details
+      links:
+        properties:
+          about:
+            type: string
+            format: url
+            description: A link to further information about the error
+            example: https://developer.oregonstate.edu/documentation/error-reference#1234
+  ErrorResult:
+    properties:
+      errors:
         type: array
-        minItems: 1
         items:
-          $ref: '#/definitions/imsx_CodeMinorFieldDType'
-    required:
-      - imsx_codeMinorField
-    additionalProperties: false
-  imsx_CodeMinorFieldDType:
-    description: This is the container for a single code minor status code.
-    type: object
-    properties:
-      imsx_codeMinorFieldName:
-        description: Model Primitive Datatype = NormalizedString. This should contain the identity of the system that has produced the code minor status code report. In most cases this will be the target service provider denoted as 'TargetEndSystem'.
-        type: string
-        default: TargetEndSystem
-      imsx_codeMinorFieldValue:
-        description: The code minor status code (this is a value from the corresponding enumerated vocabulary).
-        type: string
-        enum:
-          - fullsuccess
-          - invalid_filter_field
-          - invalid_selection_field
-          - invaliddata
-          - unauthorisedrequest
-          - forbidden
-          - server_busy
-          - unknownobject
-          - internal_server_error
-    required:
-      - imsx_codeMinorFieldName
-      - imsx_codeMinorFieldValue
-    additionalProperties: false
-  imsx_StatusInfoDType:
-    description: This is the container for the status code and associated information returned within the HTTP messages received from the Service Provider. For the OneRoster Rostering service this object will only be returned to provide information about a failed request i.e. it will NOT be in the payload for a successful request. See Appendix B for further information on the interpretation of the information contained within this class.
-    type: object
-    properties:
-      imsx_codeMajor:
-        description: The code major value (from the corresponding enumerated vocabulary). See Appendix B for further information on the interpretation of this set of codes. The permitted vocabulary for the values for the CodeMajor field.
-        type: string
-        enum:
-          - success
-          - processing
-          - failure
-          - unsupported
-      imsx_severity:
-        description: The severity value (from the corresponding enumerated vocabulary). See Appendix B for further information on the interpretation of this set of codes.
-        type: string
-        enum:
-          - status
-          - warning
-          - error
-      imsx_description:
-        description: Model Primitive Datatype = String. A human readable description supplied by the entity creating the status code information.
-        type: string
-      imsx_CodeMinor:
-        $ref: '#/definitions/imsx_CodeMinorDType'
-    required:
-      - imsx_codeMajor
-      - imsx_severity
-    additionalProperties: false
-consumes:
-  - application/json
-produces:
-  - application/json
+          $ref: '#/definitions/ErrorObject'
