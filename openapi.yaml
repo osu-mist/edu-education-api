@@ -1,218 +1,1136 @@
 swagger: '2.0'
 info:
-  title: Express API Skeleton
-  description: Skeleton for Express APIs
-  version: v1
-  license:
-    name: GNU Affero General Public License Version 3
-    url: http://www.gnu.org/licenses/agpl-3.0.en.html
+  version: '1.0'
+  title: EDU-API OpenAPI (JSON) Definition
+  description: The EDU-API Education 1.0 service binding is available in REST/JSON. The model is based upon the IMS PSM modelling approach.
+  termsOfService: 'Permission is granted to all parties to use excerpts from this document as needed in producing requests for proposals. The limited permissions granted above are perpetual and will not be revoked by IMS or its successors or assigns. THIS API DEFINITION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NONINFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS SPECIFICATION SHALL BE MADE ENTIRELY AT THE IMPLEMENTERS OWN RISK, AND NEITHER THE  CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER,  DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS API DEFINITION.'
   contact:
-    name: IS Data Architecture Team
-    url: https://is.oregonstate.edu/data-architecture
-    email: isdataarchitecture@oregonstate.edu
+    name: 'Lisa Mattson (COO), IMS Global '
+    url: 'http://www.imsglobal.org'
+    email: lmattson@imsglobal.org
+  license:
+    name: IMS Global
+    url: 'https://www.imsglobal.org/license.html'
+host: www.imsglobal.org
+basePath: /ims/eduapi/v1p0
 schemes:
+  - http
   - https
-host: api.oregonstate.edu
-basePath: /v1
-externalDocs:
-  description: GitHub Repository
-  url: https://github.com/osu-mist/express-api-skeleton
-produces:
-  - application/json
+tags:
+  - name: EducationOfferingsManagement
+    description: No description supplied.
+  - name: EducationsManagement
+    description: No description supplied.
+  - name: OfferingAssociationsManagement
+    description: No description supplied.
 paths:
-  /pets:
+  /educationOfferings:
     get:
-      summary: List all pets
+      operationId: getAllEducationOfferings
+      summary: The REST read request message for the getAllEducationOfferings() API call.
       tags:
-        - pets
-      description: Get all pets
-      operationId: getPets
+        - EducationOfferingsManagement
+      description: ...not supplied...
       parameters:
-        - $ref: '#/parameters/authorization'
-        - $ref: '#/parameters/pageNumber'
-        - $ref: '#/parameters/pageSize'
-        - in: query
-          name: species
-          description: Search by pet species
+        - name: limit
+          in: query
+          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
+          required: false
+          type: integer
+          format: int32
+          default: 100
+          minimum: 1
+          allowEmptyValue: false
+        - name: offset
+          in: query
+          description: The number of the first record to be supplied in the segmented response message.
+          required: false
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+          allowEmptyValue: false
+        - name: sort
+          in: query
+          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
           required: false
           type: string
+          allowEmptyValue: false
+        - name: orderBy
+          in: query
+          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          enum:
+            - asc
+            - desc
+          allowEmptyValue: false
+        - name: filter
+          in: query
+          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          allowEmptyValue: false
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
       responses:
         '200':
-          description: Successful response
+          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/PetsResult'
+            $ref: '#/definitions/EducationOfferingSetDType'
         '400':
-          description: Bad request
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
           schema:
-            $ref: '#/definitions/ErrorResult'
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
         '500':
-          description: Internal server error
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
           schema:
-            $ref: '#/definitions/ErrorResult'
-  /pets/{id}:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+  '/educationOfferings/{sourcedId}':
     get:
-      summary: Info for a specific pet
+      operationId: getEducationOffering
+      summary: The REST read request message for the getEducationOffering() API call.
       tags:
-        - pets
-      description: Get pet by unique ID
-      operationId: getPetById
+        - EducationOfferingsManagement
+      description: ...not supplied...
       parameters:
-        - $ref: '#/parameters/authorization'
-        - name: id
+        - name: sourcedId
           in: path
-          description: Unique Pet ID
+          description: ...tbd...
           required: true
           type: string
-          pattern: '^\d+$'
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
       responses:
         '200':
-          description: Successful response
+          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/PetResult'
+            $ref: '#/definitions/SingleEducationOfferingDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
         '404':
-          description: PetResource not found
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
           schema:
-            $ref: '#/definitions/ErrorResult'
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
         '500':
-          description: Internal server error
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
           schema:
-            $ref: '#/definitions/ErrorResult'
-parameters:
-  authorization:
-    name: Authorization
-    in: header
-    type: string
-    required: true
-    description: '"Bearer [token]" where [token] is your OAuth2 access token'
-  pageNumber:
-    name: page[number]
-    in: query
-    type: integer
-    required: false
-    description: Page number of results
-    default: 1
-    minimum: 1
-  pageSize:
-    name: page[size]
-    in: query
-    type: integer
-    required: false
-    description: Number of results to return
-    default: 25
-    maximum: 500
-    minimum: 1
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    delete:
+      operationId: deleteEducationOffering
+      summary: The REST delete request message for the deleteEducationOffering() API call.
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+      responses:
+        '204':
+          description: ...tbd (Response description)...
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '404':
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    put:
+      operationId: putEducationOffering
+      summary: The REST create request message for the putEducationOffering() API call.
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+        - name: educationOffering
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/SingleEducationOfferingDType'
+      responses:
+        '201':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+  /educations:
+    get:
+      operationId: getAllEducations
+      summary: The REST read request message for the getAllEducations() API call.
+      tags:
+        - EducationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: limit
+          in: query
+          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
+          required: false
+          type: integer
+          format: int32
+          default: 100
+          minimum: 1
+          allowEmptyValue: false
+        - name: offset
+          in: query
+          description: The number of the first record to be supplied in the segmented response message.
+          required: false
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+          allowEmptyValue: false
+        - name: sort
+          in: query
+          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          allowEmptyValue: false
+        - name: orderBy
+          in: query
+          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          enum:
+            - asc
+            - desc
+          allowEmptyValue: false
+        - name: filter
+          in: query
+          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          allowEmptyValue: false
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/EducationSetDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+  '/educations/{sourcedId}':
+    get:
+      operationId: getEducation
+      summary: The REST read request message for the getEducation() API call.
+      tags:
+        - EducationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/SingleEducationDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '404':
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    delete:
+      operationId: deleteEducation
+      summary: The REST delete request message for the deleteEducation() API call.
+      tags:
+        - EducationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+      responses:
+        '204':
+          description: ...tbd (Response description)...
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '404':
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    put:
+      operationId: putEducation
+      summary: The REST create request message for the putEducation() API call.
+      tags:
+        - EducationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+        - name: education
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/SingleEducationDType'
+      responses:
+        '201':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+  /offeringAssociations:
+    get:
+      operationId: getAllOfferingAssociations
+      summary: The REST read request message for the getAllOfferingAssociations() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: limit
+          in: query
+          description: To define the download segmentation value i.e. the maximum number of records to be contained in the response.
+          required: false
+          type: integer
+          format: int32
+          default: 100
+          minimum: 1
+          allowEmptyValue: false
+        - name: offset
+          in: query
+          description: The number of the first record to be supplied in the segmented response message.
+          required: false
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+          allowEmptyValue: false
+        - name: sort
+          in: query
+          description: 'Identifies the sort criteria to be used for the records in the response message. Use with the orderBy parameter. The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          allowEmptyValue: false
+        - name: orderBy
+          in: query
+          description: 'The form of ordering for response to the sorted request i.e. ascending (asc) or descending (desc). The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          enum:
+            - asc
+            - desc
+          allowEmptyValue: false
+        - name: filter
+          in: query
+          description: 'The filtering rules to be applied when identifying the records to be supplied in the response message. The sort order should follow the [UNICODE, 16] standard.'
+          required: false
+          type: string
+          allowEmptyValue: false
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/OfferingAssociationSetDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+  '/offeringAssociations/{sourcedId}':
+    get:
+      operationId: getOfferingAssociation
+      summary: The REST read request message for the getOfferingAssociation() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+        - name: fields
+          in: query
+          description: To identify the range of fields that should be supplied in the response message.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/SingleOfferingAssociationDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '404':
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    delete:
+      operationId: deleteOfferingAssociation
+      summary: The REST delete request message for the deleteOfferingAssociation() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+      responses:
+        '204':
+          description: ...tbd (Response description)...
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '404':
+          description: 'Either the supplied identifier is unknown in the Service Provider and so the object could not be changed or an invalid GUID has been supplied. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. The statement ''Unknown Object'' should also be presented. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+    put:
+      operationId: putOfferingAssociation
+      summary: The REST create request message for the putOfferingAssociation() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: sourcedId
+          in: path
+          description: ...tbd...
+          required: true
+          type: string
+      responses:
+        '201':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '400':
+          description: 'Either an invalid selection field or invalid filter selection was supplied and data filtering on the selection criteria was not possible i.e. ''invalid_selection_field'' or  ''invalid_filter_field'' respectively. This is accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '401':
+          description: 'The request was not correctly authorised i.e. ''unauthorisedrequest''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '403':
+          description: 'This is used to indicate that the server can be reached and process the request but refuses to take any further action i.e. ''forbidden''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '422':
+          description: 'This error condition may occur if a JSON request body contains well-formed (i.e. syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '429':
+          description: 'The server is receiving too many requests i.e. ''server_busy''. Retry at a later time. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        '500':
+          description: 'This code should be used only if there is catastrophic error and there is not a more appropriate code i.e. ''internal_server_error''. This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
+        default:
+          description: 'This is the default error response when no other appropriate code is available.  This would be accompanied by the ''codeMajor/severity'' values of ''failure/error''. '
+          schema:
+            $ref: '#/definitions/imsx_StatusInfoDType'
 definitions:
-  Meta:
+  EducationDType:
+    description: ...tbd (Class description)...
+    type: object
     properties:
-      totalResults:
-        type: integer
-        description: Total number of results
-        example: 10
-      totalPages:
-        type: integer
-        description: Total number of pages
-        example: 10
-      currentPageNumber:
-        type: integer
-        description: Page number of the returned results
-        example: 1
-      currentPageSize:
-        type: integer
-        description: Number of results per page
-        example: 25
-  SelfLink:
-    properties:
-      self:
+      sourcedId:
+        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
         type: string
-        format: url
-        description: Self-link of current resource
-  PaginationLinks:
-    properties:
-      first:
-        type: string
-        format: url
-        description: The first page of data
-      last:
-        type: string
-        format: url
-        description: The last page of data
-      prev:
-        type: string
-        format: url
-        description: The previous page of data
-      next:
-        type: string
-        format: url
-        description: The next page of data
-  PetResource:
-    properties:
-      id:
-        type: string
-        description: A unique ID of pet
-      type:
-        type: string
-        enum: [pet]
-      links:
-        $ref: '#/definitions/SelfLink'
-      attributes:
-        properties:
-          name:
-            type: string
-            description: Name of pet
-            example: Hedwig
-          owner:
-            type: string
-            description: Name of owner
-            example: Harry Potter
-          species:
-            type: string
-            description: Species of pet
-            example: Owl
-  PetResult:
-    properties:
-      links:
-        $ref: '#/definitions/SelfLink'
-      data:
-        $ref: '#/definitions/PetResource'
-  PetsResult:
-    properties:
-      links:
-        allOf:
-          - $ref: '#/definitions/SelfLink'
-          - $ref: '#/definitions/PaginationLinks'
-      meta:
-        $ref: '#/definitions/Meta'
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/PetResource'
-  ErrorObject:
-    properties:
       status:
+        description: ...tbd (Enumeration description)...
         type: string
-        description: HTTP status code
-        example: '123'
+        enum:
+          - active
+          - tobedeleted
+      dateLastModified:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      metadata:
+        $ref: '#/definitions/MetadataDType'
       title:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
         type: string
-        description: A short, user readable summary of the error
-        example: Not Found
       code:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
         type: string
-        description: An application-specific error code
-        example: '1234'
-      detail:
+      organization:
+        $ref: '#/definitions/GUIDRefDType'
+      level:
+        description: ...tbd (Enumeration description)...
         type: string
-        description: A long description of the error that may contain instance-specific details
-      links:
-        properties:
-          about:
-            type: string
-            format: url
-            description: A link to further information about the error
-            example: https://developer.oregonstate.edu/documentation/error-reference#1234
-  ErrorResult:
-    properties:
-      errors:
+        enum:
+          - graduate
+          - undergraduate
+      meetings:
+        description: ...tbd (ComplexType property description)...
         type: array
+        minItems: 0
         items:
-          $ref: '#/definitions/ErrorObject'
+          $ref: '#/definitions/MeetingsDType'
+      creditType:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - credit
+          - non-credit
+          - ects
+      description:
+        description: Model Primitive Datatype = String. ...tbd (PrimitiveType description)...
+        type: string
+      courseType:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+      educationType:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+      gradingScheme:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+    required:
+      - sourcedId
+      - status
+      - dateLastModified
+      - title
+      - code
+      - organization
+      - educationType
+    additionalProperties: false
+  EducationOfferingDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      sourcedId:
+        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+        type: string
+      status:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - active
+          - tobedeleted
+      dateLastModified:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      metadata:
+        $ref: '#/definitions/MetadataDType'
+      title:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+      offeringCode:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+      location:
+        description: ...tbd (ComplexType property description)...
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/GUIDRefDType'
+      org:
+        $ref: '#/definitions/GUIDRefDType'
+      academicSession:
+        $ref: '#/definitions/GUIDRefDType'
+      education:
+        $ref: '#/definitions/GUIDRefDType'
+      registrationStatus:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - open
+          - closed
+          - pending
+          - waitlist
+      startDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      endDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      offeringFormat:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - online
+          - blended
+          - onground
+    required:
+      - sourcedId
+      - status
+      - dateLastModified
+      - title
+      - offeringCode
+      - org
+      - academicSession
+      - education
+      - registrationStatus
+      - offeringFormat
+    additionalProperties: false
+  EducationOfferingSetDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      educationOfferingSet:
+        description: ...tbd (ComplexType property description)...
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/EducationOfferingDType'
+    additionalProperties: false
+  EducationSetDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      educations:
+        description: ...tbd (ComplexType property description)...
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/EducationDType'
+    additionalProperties: false
+  GUIDRefDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      href:
+        description: Model Primitive Datatype = AnyURI. ...tbd (PrimitiveType description)...
+        type: string
+        format: uri
+      sourcedId:
+        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+        type: string
+      type:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - academicSession
+          - education
+          - educationOffering
+          - location
+          - organization
+          - person
+    required:
+      - href
+      - sourcedId
+      - type
+    additionalProperties: false
+  MeetingsDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      format:
+        description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType description)...
+        type: string
+      startDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      endDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+    required:
+      - format
+      - startDate
+      - endDate
+    additionalProperties: false
+  MetadataDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties: {}
+    additionalProperties: true
+  OfferingAssociationDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      sourcedId:
+        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+        type: string
+      status:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - active
+          - tobedeleted
+      dateLastModified:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      metadata:
+        $ref: '#/definitions/MetadataDType'
+      personId:
+        $ref: '#/definitions/GUIDRefDType'
+      educationOfferingId:
+        $ref: '#/definitions/GUIDRefDType'
+      role:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - administrator
+          - aide
+          - guardian
+          - parent
+          - proctor
+          - relative
+          - student
+          - teacher
+      beginDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      endDate:
+        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+        type: string
+        format: date-time
+      associationType:
+        description: ...tbd (Enumeration description)...
+        type: string
+        enum:
+          - enrollment
+          - assigned
+    required:
+      - sourcedId
+      - status
+      - dateLastModified
+      - personId
+      - educationOfferingId
+      - role
+    additionalProperties: false
+  OfferingAssociationSetDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      offeringAssociationSet:
+        description: ...tbd (ComplexType property description)...
+        type: array
+        minItems: 0
+        items:
+          $ref: '#/definitions/OfferingAssociationDType'
+    additionalProperties: false
+  SingleEducationDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      education:
+        $ref: '#/definitions/EducationDType'
+    required:
+      - education
+    additionalProperties: false
+  SingleEducationOfferingDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      educationOffering:
+        $ref: '#/definitions/EducationOfferingDType'
+    required:
+      - educationOffering
+    additionalProperties: false
+  SingleOfferingAssociationDType:
+    description: ...tbd (Class description)...
+    type: object
+    properties:
+      offeringAssociation:
+        $ref: '#/definitions/OfferingAssociationDType'
+    required:
+      - offeringAssociation
+    additionalProperties: false
+  imsx_CodeMinorDType:
+    description: This is the container for the set of code minor status codes reported in the responses from the Service Provider.
+    type: object
+    properties:
+      imsx_codeMinorField:
+        description: Each reported code minor status code.
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/imsx_CodeMinorFieldDType'
+    required:
+      - imsx_codeMinorField
+    additionalProperties: false
+  imsx_CodeMinorFieldDType:
+    description: This is the container for a single code minor status code.
+    type: object
+    properties:
+      imsx_codeMinorFieldName:
+        description: Model Primitive Datatype = NormalizedString. This should contain the identity of the system that has produced the code minor status code report. In most cases this will be the target service provider denoted as 'TargetEndSystem'.
+        type: string
+        default: TargetEndSystem
+      imsx_codeMinorFieldValue:
+        description: The code minor status code (this is a value from the corresponding enumerated vocabulary).
+        type: string
+        enum:
+          - fullsuccess
+          - invalid_filter_field
+          - invalid_selection_field
+          - invaliddata
+          - unauthorisedrequest
+          - forbidden
+          - server_busy
+          - unknownobject
+          - internal_server_error
+    required:
+      - imsx_codeMinorFieldName
+      - imsx_codeMinorFieldValue
+    additionalProperties: false
+  imsx_StatusInfoDType:
+    description: This is the container for the status code and associated information returned within the HTTP messages received from the Service Provider. For the OneRoster Rostering service this object will only be returned to provide information about a failed request i.e. it will NOT be in the payload for a successful request. See Appendix B for further information on the interpretation of the information contained within this class.
+    type: object
+    properties:
+      imsx_codeMajor:
+        description: The code major value (from the corresponding enumerated vocabulary). See Appendix B for further information on the interpretation of this set of codes. The permitted vocabulary for the values for the CodeMajor field.
+        type: string
+        enum:
+          - success
+          - processing
+          - failure
+          - unsupported
+      imsx_severity:
+        description: The severity value (from the corresponding enumerated vocabulary). See Appendix B for further information on the interpretation of this set of codes.
+        type: string
+        enum:
+          - status
+          - warning
+          - error
+      imsx_description:
+        description: Model Primitive Datatype = String. A human readable description supplied by the entity creating the status code information.
+        type: string
+      imsx_CodeMinor:
+        $ref: '#/definitions/imsx_CodeMinorDType'
+    required:
+      - imsx_codeMajor
+      - imsx_severity
+    additionalProperties: false
+consumes:
+  - application/json
+produces:
+  - application/json
