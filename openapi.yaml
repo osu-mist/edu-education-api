@@ -26,8 +26,8 @@ tags:
 paths:
   /educationOfferings:
     get:
-      operationId: getAllEducationOfferings
-      summary: The REST read request message for the getAllEducationOfferings() API call.
+      operationId: getEducationOfferings
+      summary: The REST read request message for the getEducationOfferings() API call.
       tags:
         - EducationOfferingsManagement
       description: ...not supplied...
@@ -183,8 +183,8 @@ paths:
           $ref: '#/responses/Default'
   /educations:
     get:
-      operationId: getAllEducations
-      summary: The REST read request message for the getAllEducations() API call.
+      operationId: getEducations
+      summary: The REST read request message for the getEducations() API call.
       tags:
         - EducationsManagement
       description: ...not supplied...
@@ -340,8 +340,8 @@ paths:
           $ref: '#/responses/Default'
   /offeringAssociations:
     get:
-      operationId: getAllOfferingAssociations
-      summary: The REST read request message for the getAllOfferingAssociations() API call.
+      operationId: getOfferingAssociations
+      summary: The REST read request message for the getOfferingAssociations() API call.
       tags:
         - OfferingAssociationsManagement
       description: ...not supplied...
@@ -355,7 +355,39 @@ paths:
         '200':
           description: The request was successfully completed and a collection has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/OfferingAssociationSetDType'
+            $ref: '#/definitions/OfferingAssociationSetResult'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '422':
+          $ref: '#/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/responses/TooManyRequests'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+    post:
+      operationId: postOfferingAssociation
+      summary: The REST create request message for the postOfferingAssociation() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - name: requestBody
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/OfferingAssociationPostBody'
+      responses:
+        '201':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/OfferingAssociationResult'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -384,7 +416,42 @@ paths:
         '200':
           description: The request was successfully completed and a record has been returned. This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a REST binding a HTTP code of '200'.
           schema:
-            $ref: '#/definitions/SingleOfferingAssociationDType'
+            $ref: '#/definitions/OfferingAssociationResult'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/responses/TooManyRequests'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        default:
+          $ref: '#/responses/Default'
+    patch:
+      operationId: patchOfferingAssociation
+      summary: The REST create request message for the patchOfferingAssociation() API call.
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/offeringAssociationId'
+        - name: requestBody
+          in: body
+          description: ...tbd...
+          required: true
+          schema:
+            $ref: '#/definitions/OfferingAssociationPatchBody'
+      responses:
+        '200':
+          description: ...tbd (Response description)...
+          schema:
+            $ref: '#/definitions/OfferingAssociationResult'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -420,33 +487,6 @@ paths:
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
-        '422':
-          $ref: '#/responses/UnprocessableEntity'
-        '429':
-          $ref: '#/responses/TooManyRequests'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        default:
-          $ref: '#/responses/Default'
-    put:
-      operationId: putOfferingAssociation
-      summary: The REST create request message for the putOfferingAssociation() API call.
-      tags:
-        - OfferingAssociationsManagement
-      description: ...not supplied...
-      parameters:
-        - $ref: '#/parameters/offeringAssociationId'
-      responses:
-        '201':
-          description: ...tbd (Response description)...
-          schema:
-            $ref: '#/definitions/imsx_StatusInfoDType'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
         '422':
           $ref: '#/responses/UnprocessableEntity'
         '429':
@@ -855,6 +895,137 @@ definitions:
           attributes:
             type: object
             properties: *EducationOfferingAttributesProperties
+  OfferingAssociationResource:
+    description: ...tbd (Class description)...
+    type: object
+    required:
+      - type
+      - id
+      - attributes
+    additionalProperties: false
+    properties:
+      type: &OfferingAssociationType
+        type: string
+        enum: [offeringAssociation]
+      id: &OfferingAssociationId
+        type: string
+        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
+      attributes:
+        type: object
+        required:
+          - status
+          - dateLastModified
+          - metadata
+          - personId
+          - educationOfferingId
+          - role
+          - beginDate
+          - endDate
+          - associationType
+        additionalProperties: false
+        properties: &OfferingAssociationAttributesProperties
+          status:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - active
+              - tobedeleted
+          dateLastModified:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          metadata:
+            $ref: '#/definitions/MetadataDType'
+          personId:
+            $ref: '#/definitions/GUIDRefDType'
+          educationOfferingId:
+            $ref: '#/definitions/GUIDRefDType'
+          role:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - administrator
+              - aide
+              - guardian
+              - parent
+              - proctor
+              - relative
+              - student
+              - teacher
+          beginDate:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          endDate:
+            description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
+            type: string
+            format: date-time
+          associationType:
+            description: ...tbd (Enumeration description)...
+            type: string
+            enum:
+              - enrollment
+              - assigned
+  OfferingAssociationResult:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        $ref: '#/definitions/OfferingAssociationResource'
+  OfferingAssociationSetResult:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/OfferingAssociationResource'
+  OfferingAssociationPostBody:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: object
+        required:
+          - type
+          - attributes
+        properties:
+          type: *OfferingAssociationType
+          attributes:
+            type: object
+            # required fields taken from original required fields
+            required:
+              - sourcedId
+              - status
+              - dateLastModified
+              - personId
+              - educationOfferingId
+              - role
+            properties: *OfferingAssociationAttributesProperties
+  OfferingAssociationPatchBody:
+    type: object
+    required:
+      - data
+    additionalProperties: false
+    properties:
+      data:
+        type: object
+        required:
+          - type
+          - id
+          - attributes
+        properties:
+          type: *OfferingAssociationType
+          id: *OfferingAssociationId
+          attributes:
+            type: object
+            properties: *OfferingAssociationAttributesProperties
   GUIDRefDType:
     description: ...tbd (Class description)...
     type: object
@@ -906,83 +1077,6 @@ definitions:
     type: object
     properties: {}
     additionalProperties: true
-  OfferingAssociationDType:
-    description: ...tbd (Class description)...
-    type: object
-    properties:
-      sourcedId:
-        description: Model Primitive Datatype = String. ...tbd (DerivedType property description)...
-        type: string
-      status:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - active
-          - tobedeleted
-      dateLastModified:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      metadata:
-        $ref: '#/definitions/MetadataDType'
-      personId:
-        $ref: '#/definitions/GUIDRefDType'
-      educationOfferingId:
-        $ref: '#/definitions/GUIDRefDType'
-      role:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - administrator
-          - aide
-          - guardian
-          - parent
-          - proctor
-          - relative
-          - student
-          - teacher
-      beginDate:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      endDate:
-        description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
-        type: string
-        format: date-time
-      associationType:
-        description: ...tbd (Enumeration description)...
-        type: string
-        enum:
-          - enrollment
-          - assigned
-    required:
-      - sourcedId
-      - status
-      - dateLastModified
-      - personId
-      - educationOfferingId
-      - role
-    additionalProperties: false
-  OfferingAssociationSetDType:
-    description: ...tbd (Class description)...
-    type: object
-    properties:
-      offeringAssociationSet:
-        description: ...tbd (ComplexType property description)...
-        type: array
-        minItems: 0
-        items:
-          $ref: '#/definitions/OfferingAssociationDType'
-    additionalProperties: false
-  SingleOfferingAssociationDType:
-    description: ...tbd (Class description)...
-    type: object
-    properties:
-      offeringAssociation:
-        $ref: '#/definitions/OfferingAssociationDType'
-    required:
-      - offeringAssociation
-    additionalProperties: false
   imsx_CodeMinorDType:
     description: This is the container for the set of code minor status codes reported in the responses from the Service Provider.
     type: object
