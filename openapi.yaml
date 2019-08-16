@@ -57,19 +57,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationOfferingSetResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     post:
       operationId: postEducationOffering
       summary: The REST create request message for the postEducationOffering() API call.
@@ -89,19 +89,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
   /educationOfferings/{id}:
     get:
       operationId: getEducationOffering
@@ -120,21 +120,21 @@ paths:
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     patch:
       operationId: patchEducationOffering
       summary: The REST update request message for the patchEducationOffering() API call.
@@ -155,21 +155,21 @@ paths:
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     delete:
       operationId: deleteEducationOffering
       summary: The REST delete request message for the deleteEducationOffering() API call.
@@ -182,21 +182,21 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
   /educations:
     get:
       operationId: getEducations
@@ -218,19 +218,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationSetResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     post:
       operationId: postEducation
       summary: The REST create request message for the postEducation() API call.
@@ -250,19 +250,19 @@ paths:
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
   /educations/{id}:
     get:
       operationId: getEducation
@@ -281,21 +281,21 @@ paths:
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     delete:
       operationId: deleteEducation
       summary: The REST delete request message for the deleteEducation() API call.
@@ -308,21 +308,21 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     patch:
       operationId: patchEducation
       summary: The REST create request message for the patchEducation() API call.
@@ -343,21 +343,21 @@ paths:
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
   /offeringAssociations:
     get:
       operationId: getOfferingAssociations
@@ -379,19 +379,19 @@ paths:
           schema:
             $ref: '#/definitions/OfferingAssociationSetResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     post:
       operationId: postOfferingAssociation
       summary: The REST create request message for the postOfferingAssociation() API call.
@@ -411,19 +411,19 @@ paths:
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
   /offeringAssociations/{id}:
     get:
       operationId: getOfferingAssociation
@@ -442,21 +442,21 @@ paths:
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     patch:
       operationId: patchOfferingAssociation
       summary: The REST create request message for the patchOfferingAssociation() API call.
@@ -477,21 +477,21 @@ paths:
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
     delete:
       operationId: deleteOfferingAssociation
       summary: The REST delete request message for the deleteOfferingAssociation() API call.
@@ -504,21 +504,21 @@ paths:
         '204':
           description: ...tbd (Response description)...
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/400'
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/401'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/responses/403'
         '404':
-          $ref: '#/responses/NotFound'
+          $ref: '#/responses/404'
         '422':
-          $ref: '#/responses/UnprocessableEntity'
+          $ref: '#/responses/422'
         '429':
-          $ref: '#/responses/TooManyRequests'
+          $ref: '#/responses/429'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/responses/500'
         default:
-          $ref: '#/responses/Default'
+          $ref: '#/responses/default'
 parameters:
   limit:
     name: page[limit]
@@ -586,51 +586,44 @@ parameters:
     required: true
     type: string
 responses:
-  InternalServerError:
-    description: "This code should be used only if there is catastrophic error and there is not a
-    more appropriate code i.e. 'internal_server_error'. This would be accompanied by the
-    'codeMajor/severity' values of 'failure/error'."
-    schema:
-      $ref: '#/definitions/ErrorResult'
-  BadRequest:
+  '400':
     description: "Either an invalid selection field or invalid filter selection was supplied and
-    data filtering on the selection criteria was not possible i.e. 'invalid_selection_field' or
-    'invalid_filter_field' respectively. This is accompanied by the 'codeMajor/severity' values
-    of 'failure/error'."
+      data filtering on the selection criteria was not possible i.e. 'invalid_selection_field' or
+      'invalid_filter_field' respectively."
     schema:
       $ref: '#/definitions/ErrorResult'
-  UnprocessableEntity:
-    description: "This error condition may occur if a JSON request body contains well-formed (i.e.
-    syntactically correct), but semantically erroneous, JSON instructions. This would be accompanied
-    by the 'codeMajor/severity' values of 'failure/error'."
+  '401':
+    description: "The request was not correctly authorised i.e. 'unauthorisedrequest."
     schema:
       $ref: '#/definitions/ErrorResult'
-  TooManyRequests:
-    description: "The server is receiving too many requests i.e. 'server_busy'. Retry at a later
-    time. This would be accompanied by the 'codeMajor/severity' values of 'failure/error'."
-    schema:
-      $ref: '#/definitions/ErrorResult'
-  Unauthorized:
-    description: "The request was not correctly authorised i.e. 'unauthorisedrequest'. This would
-    be accompanied by the 'codeMajor/severity' values of 'failure/error'."
-    schema:
-      $ref: '#/definitions/ErrorResult'
-  Forbidden:
+  '403':
     description: "This is used to indicate that the server can be reached and process the request
-    but refuses to take any further action i.e. 'forbidden'. This would be accompanied by the
-    'codeMajor/severity' values of 'failure/error'."
+      but refuses to take any further action i.e. 'forbidden'."
     schema:
       $ref: '#/definitions/ErrorResult'
-  NotFound:
+  '404':
     description: "Either the supplied identifier is unknown in the Service Provider and so the
-    object could not be changed or an invalid GUID has been supplied. This would be accompanied by
-    the 'codeMajor/severity' values of 'failure/error'. The statement 'Unknown Object' should
-    also be presented."
+      object could not be changed or an invalid GUID has been supplied. The statement 'Unknown
+      Object' should also be presented."
     schema:
       $ref: '#/definitions/ErrorResult'
-  Default:
-    description: "This is the default error response when no other appropriate code is available.
-    This would be accompanied by the 'codeMajor/severity' values of 'failure/error'."
+  '422':
+    description: "This error condition may occur if a JSON request body contains well-formed (i.e.
+      syntactically correct), but semantically erroneous, JSON instructions."
+    schema:
+      $ref: '#/definitions/ErrorResult'
+  '429':
+    description: "The server is receiving too many requests i.e. 'server_busy'. Retry at a later
+      time."
+    schema:
+      $ref: '#/definitions/ErrorResult'
+  '500':
+    description: "This code should be used only if there is catastrophic error and there is not a
+      more appropriate code i.e. 'internal_server_error'."
+    schema:
+      $ref: '#/definitions/ErrorResult'
+  default:
+    description: "This is the default error response when no other appropriate code is available."
     schema:
       $ref: '#/definitions/ErrorResult'
 definitions:
