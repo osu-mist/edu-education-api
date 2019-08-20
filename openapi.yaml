@@ -68,8 +68,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     post:
       operationId: postEducationOffering
       summary: The REST create request message for the postEducationOffering() API call.
@@ -107,8 +105,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
   /educationOfferings/{id}:
     get:
       operationId: getEducationOffering
@@ -140,8 +136,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     patch:
       operationId: patchEducationOffering
       summary: The REST update request message for the patchEducationOffering() API call.
@@ -177,8 +171,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     delete:
       operationId: deleteEducationOffering
       summary: The REST delete request message for the deleteEducationOffering() API call.
@@ -204,8 +196,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
   /educations:
     get:
       operationId: getEducations
@@ -238,8 +228,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     post:
       operationId: postEducation
       summary: The REST create request message for the postEducation() API call.
@@ -277,8 +265,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
   /educations/{id}:
     get:
       operationId: getEducation
@@ -310,8 +296,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     delete:
       operationId: deleteEducation
       summary: The REST delete request message for the deleteEducation() API call.
@@ -337,8 +321,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     patch:
       operationId: patchEducation
       summary: The REST create request message for the patchEducation() API call.
@@ -374,8 +356,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
   /offeringAssociations:
     get:
       operationId: getOfferingAssociations
@@ -408,8 +388,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     post:
       operationId: postOfferingAssociation
       summary: The REST create request message for the postOfferingAssociation() API call.
@@ -447,8 +425,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
   /offeringAssociations/{id}:
     get:
       operationId: getOfferingAssociation
@@ -480,8 +456,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     patch:
       operationId: patchOfferingAssociation
       summary: The REST create request message for the patchOfferingAssociation() API call.
@@ -517,8 +491,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
     delete:
       operationId: deleteOfferingAssociation
       summary: The REST delete request message for the deleteOfferingAssociation() API call.
@@ -544,8 +516,6 @@ paths:
           $ref: '#/responses/429'
         '500':
           $ref: '#/responses/500'
-        default:
-          $ref: '#/responses/default'
 parameters:
   limit:
     name: page[limit]
@@ -655,10 +625,6 @@ responses:
   '500':
     description: "This code should be used only if there is catastrophic error and there is not a
       more appropriate code i.e. 'internal_server_error'."
-    schema:
-      $ref: '#/definitions/ErrorResult'
-  default:
-    description: This is the default error response when no other appropriate code is available.
     schema:
       $ref: '#/definitions/ErrorResult'
 definitions:
