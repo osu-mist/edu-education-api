@@ -555,7 +555,10 @@ parameters:
     description: 'The filtering rules to be applied when identifying the records to be supplied in
     the response message. The sort order should follow the [UNICODE, 16] standard.'
     required: false
-    type: string
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
     allowEmptyValue: false
   fields:
     name: fields
