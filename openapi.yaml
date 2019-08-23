@@ -657,21 +657,6 @@ definitions:
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
-        # Made all fields required. This prevents clients from having to strictly check that all
-        # fields exist before accessing them.
-        required:
-          - status
-          - dateLastModified
-          - title
-          - code
-          - organization
-          - level
-          - meetings
-          - creditType
-          - description
-          - courseType
-          - educationType
-          - gradingScheme
         additionalProperties: false
         properties: &EducationAttributesProperties
           status:
@@ -811,21 +796,6 @@ definitions:
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
-        # Made all fields required. This prevents clients from having to strictly check that all
-        # fields exist before accessing them.
-        required:
-          - status
-          - dateLastModified
-          - title
-          - offeringCode
-          - location
-          - org
-          - academicSession
-          - education
-          - registrationStatus
-          - startDate
-          - endDate
-          - offeringFormat
         additionalProperties: false
         properties: &EducationOfferingAttributesProperties
           status:
@@ -965,15 +935,6 @@ definitions:
         $ref: '#/definitions/MetadataDType'
       attributes:
         type: object
-        required:
-          - status
-          - dateLastModified
-          - personId
-          - educationOfferingId
-          - role
-          - beginDate
-          - endDate
-          - associationType
         additionalProperties: false
         properties: &OfferingAssociationAttributesProperties
           status:
