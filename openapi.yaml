@@ -208,6 +208,7 @@ paths:
       parameters:
         - $ref: '#/parameters/educationOfferingId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
@@ -398,6 +399,7 @@ paths:
       parameters:
         - $ref: '#/parameters/educationId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
@@ -431,6 +433,7 @@ paths:
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/filter'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
@@ -496,6 +499,7 @@ paths:
       parameters:
         - $ref: '#/parameters/offeringAssociationId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
@@ -704,6 +708,13 @@ responses:
     schema:
       $ref: '#/definitions/ErrorResult'
 definitions:
+  IncludedResources:
+    type: object
+    properties:
+      included:
+        type: array
+        items:
+          type: object
   EducationResource:
     description: ...tbd (Class description)...
     type: object
@@ -747,6 +758,8 @@ definitions:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
             type: string
+          # If this property is referencing an organization resource available at some other API
+          # endpoint, this should be moved to the relationships field.
           organization:
             $ref: '#/definitions/GUIDRefDType'
           level:
@@ -906,14 +919,20 @@ definitions:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
             type: string
+          # If this property is referencing location resources available at some other API endpoint,
+          # this should be moved to the relationships field.
           location:
             description: ...tbd (ComplexType property description)...
             type: array
             minItems: 0
             items:
               $ref: '#/definitions/GUIDRefDType'
+          # If this property is referencing an org resource available at some other API endpoint,
+          # this should be moved to the relationships field.
           org:
             $ref: '#/definitions/GUIDRefDType'
+          # If this property is referencing an academicSession resource available at some other API
+          # endpoint, this should be moved to the relationships field.
           academicSession:
             $ref: '#/definitions/GUIDRefDType'
           registrationStatus:
@@ -944,27 +963,25 @@ definitions:
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        $ref: '#/definitions/EducationOfferingResource'
-      included:
-        type: array
-        items:
-          type: object
+    allOf:
+      - type: object
+        properties:
+          data:
+            $ref: '#/definitions/EducationOfferingResource'
+      - $ref: '#/definitions/IncludedResources'
   EducationOfferingSetResult:
     type: object
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/EducationOfferingResource'
-      included:
-        type: array
-        items:
-          type: object
+    allOf:
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/EducationOfferingResource'
+      - $ref: '#/definitions/IncludedResources'
   EducationOfferingPostBody:
     type: object
     required:
@@ -1029,6 +1046,26 @@ definitions:
       # metadata -> meta
       meta:
         $ref: '#/definitions/MetadataDType'
+      # educationOffering property moved to relationships field. This allows jsonapi relationships
+      # features such as requesting included resources
+      relationships:
+        type: object
+        properties:
+          educationOffering:
+            type: object
+            properties:
+              links:
+                type: object
+                properties:
+                  related:
+                    type: string
+                    format: uri
+                    example: '{host}{basePath}/educationOfferings/{id}'
+              data:
+                type: object
+                properties:
+                  type: *EducationOfferingType
+                  id: *EducationOfferingId
       attributes:
         type: object
         additionalProperties: false
@@ -1043,9 +1080,9 @@ definitions:
             description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
             type: string
             format: date-time
+          # If this property is referencing a person resource available at some other API endpoint,
+          # this should be moved to the relationships field.
           personId:
-            $ref: '#/definitions/GUIDRefDType'
-          educationOfferingId:
             $ref: '#/definitions/GUIDRefDType'
           role:
             description: ...tbd (Enumeration description)...
@@ -1078,19 +1115,25 @@ definitions:
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        $ref: '#/definitions/OfferingAssociationResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            $ref: '#/definitions/OfferingAssociationResource'
+      - $ref: '#/definitions/IncludedResources'
   OfferingAssociationSetResult:
     type: object
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/OfferingAssociationResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OfferingAssociationResource'
+      - $ref: '#/definitions/IncludedResources'
   OfferingAssociationPostBody:
     type: object
     required:
