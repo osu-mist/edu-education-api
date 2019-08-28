@@ -49,6 +49,7 @@ paths:
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/filter'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
@@ -114,6 +115,7 @@ paths:
       parameters:
         - $ref: '#/parameters/educationOfferingId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
@@ -628,6 +630,16 @@ parameters:
       type: string
     collectionFormat: csv
     allowEmptyValue: false
+  include:
+    name: include
+    in: query
+    description: A comma-separated list of related resources to include in the response. Each field
+      can be dot-separated to indicate nested relationships.
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
+    allowEmptyValue: false
   educationOfferingId:
     name: id
     in: path
@@ -851,6 +863,26 @@ definitions:
       # metadata -> meta
       meta:
         $ref: '#/definitions/MetadataDType'
+      # education property moved to relationships field. This allows jsonapi relationships features
+      # such as requesting included resources
+      relationships:
+        type: object
+        properties:
+          education:
+            type: object
+            properties:
+              links:
+                type: object
+                properties:
+                  related:
+                    type: string
+                    format: uri
+                    example: '{host}{basePath}/educations/{id}'
+              data:
+                type: object
+                properties:
+                  type: *EducationType
+                  id: *EducationId
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
@@ -884,8 +916,6 @@ definitions:
             $ref: '#/definitions/GUIDRefDType'
           academicSession:
             $ref: '#/definitions/GUIDRefDType'
-          education:
-            $ref: '#/definitions/GUIDRefDType'
           registrationStatus:
             description: ...tbd (Enumeration description)...
             type: string
@@ -917,6 +947,10 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/EducationOfferingResource'
+      included:
+        type: array
+        items:
+          type: object
   EducationOfferingSetResult:
     type: object
     required:
@@ -927,6 +961,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/EducationOfferingResource'
+      included:
+        type: array
+        items:
+          type: object
   EducationOfferingPostBody:
     type: object
     required:
