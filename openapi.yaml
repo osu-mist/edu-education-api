@@ -52,8 +52,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingSetResult'
         '400':
@@ -118,8 +117,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
@@ -196,6 +194,36 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  /educationOfferings/{id}/offeringAssociations:
+    get:
+      operationId: getOfferingAssociationsByEducationOfferingId
+      summary: Get all offeringAssociations for an educationOffering
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/educationOfferingId'
+        - $ref: '#/parameters/fields'
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by an HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/OfferingAssociationSetResult'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+        '503':
+          $ref: '#/responses/503'
   /educations:
     get:
       operationId: getEducations
@@ -212,8 +240,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationSetResult'
         '400':
@@ -278,8 +305,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
@@ -356,6 +382,36 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  /educations/{id}/educationOfferings:
+    get:
+      operationId: getEducationOfferingsByEducationId
+      summary: Get all educationOfferings for an education
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/educationId'
+        - $ref: '#/parameters/fields'
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by an HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/EducationOfferingSetResult'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+        '503':
+          $ref: '#/responses/503'
   /offeringAssociations:
     get:
       operationId: getOfferingAssociations
@@ -372,8 +428,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationSetResult'
         '400':
@@ -438,8 +493,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
