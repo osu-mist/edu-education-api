@@ -194,6 +194,8 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  # New endpoint: This endpoint was added to easily allow fetching all offeringAssociations for an
+  # educationOffering
   /educationOfferings/{id}/offeringAssociations:
     get:
       operationId: getOfferingAssociationsByEducationOfferingId
@@ -382,6 +384,8 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  # New endpoint: This endpoint was added to easily allow fetching all educationOfferings for an
+  # education
   /educations/{id}/educationOfferings:
     get:
       operationId: getEducationOfferingsByEducationId
