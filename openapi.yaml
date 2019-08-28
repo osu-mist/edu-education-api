@@ -49,11 +49,11 @@ paths:
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/filter'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingSetResult'
         '400':
@@ -115,11 +115,11 @@ paths:
       parameters:
         - $ref: '#/parameters/educationOfferingId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationOfferingResult'
         '400':
@@ -196,6 +196,39 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  # New endpoint: This endpoint was added to easily allow fetching all offeringAssociations for an
+  # educationOffering
+  /educationOfferings/{id}/offeringAssociations:
+    get:
+      operationId: getOfferingAssociationsByEducationOfferingId
+      summary: Get all offeringAssociations for an educationOffering
+      tags:
+        - OfferingAssociationsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/educationOfferingId'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by an HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/OfferingAssociationSetResult'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+        '503':
+          $ref: '#/responses/503'
   /educations:
     get:
       operationId: getEducations
@@ -212,8 +245,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationSetResult'
         '400':
@@ -278,8 +310,7 @@ paths:
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/EducationResult'
         '400':
@@ -356,6 +387,39 @@ paths:
           $ref: '#/responses/500'
         '503':
           $ref: '#/responses/503'
+  # New endpoint: This endpoint was added to easily allow fetching all educationOfferings for an
+  # education
+  /educations/{id}/educationOfferings:
+    get:
+      operationId: getEducationOfferingsByEducationId
+      summary: Get all educationOfferings for an education
+      tags:
+        - EducationOfferingsManagement
+      description: ...not supplied...
+      parameters:
+        - $ref: '#/parameters/educationId'
+        - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
+      responses:
+        '200':
+          description: The request was successfully completed and a record has been returned. This
+            would be accompanied by an HTTP code of '200'.
+          schema:
+            $ref: '#/definitions/EducationOfferingSetResult'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+        '503':
+          $ref: '#/responses/503'
   /offeringAssociations:
     get:
       operationId: getOfferingAssociations
@@ -369,11 +433,11 @@ paths:
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/filter'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a collection has been returned.
-            This would be accompanied by the 'codeMajor/severity' values of 'success/status' and for
-            a REST binding a HTTP code of '200'.
+            This would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationSetResult'
         '400':
@@ -435,11 +499,11 @@ paths:
       parameters:
         - $ref: '#/parameters/offeringAssociationId'
         - $ref: '#/parameters/fields'
+        - $ref: '#/parameters/include'
       responses:
         '200':
           description: The request was successfully completed and a record has been returned. This
-            would be accompanied by the 'codeMajor/severity' values of 'success/status' and for a
-            REST binding a HTTP code of '200'.
+            would be accompanied by an HTTP code of '200'.
           schema:
             $ref: '#/definitions/OfferingAssociationResult'
         '400':
@@ -570,6 +634,16 @@ parameters:
       type: string
     collectionFormat: csv
     allowEmptyValue: false
+  include:
+    name: include
+    in: query
+    description: A comma-separated list of related resources to include in the response. Each field
+      can be dot-separated to indicate nested relationships.
+    type: array
+    items:
+      type: string
+    collectionFormat: csv
+    allowEmptyValue: false
   educationOfferingId:
     name: id
     in: path
@@ -634,6 +708,13 @@ responses:
     schema:
       $ref: '#/definitions/ErrorResult'
 definitions:
+  IncludedResources:
+    type: object
+    properties:
+      included:
+        type: array
+        items:
+          type: object
   EducationResource:
     description: ...tbd (Class description)...
     type: object
@@ -677,6 +758,8 @@ definitions:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
             type: string
+          # If this property is referencing an organization resource available at some other API
+          # endpoint, this should be moved to the relationships field.
           organization:
             $ref: '#/definitions/GUIDRefDType'
           level:
@@ -793,6 +876,26 @@ definitions:
       # metadata -> meta
       meta:
         $ref: '#/definitions/MetadataDType'
+      # education property moved to relationships field. This allows jsonapi relationships features
+      # such as requesting included resources
+      relationships:
+        type: object
+        properties:
+          education:
+            type: object
+            properties:
+              links:
+                type: object
+                properties:
+                  related:
+                    type: string
+                    format: uri
+                    example: '{host}{basePath}/educations/{id}'
+              data:
+                type: object
+                properties:
+                  type: *EducationType
+                  id: *EducationId
       # all other fields besides sourcedId moved to attributes object
       attributes:
         type: object
@@ -816,17 +919,21 @@ definitions:
             description: Model Primitive Datatype = NormalizedString. ...tbd (PrimitiveType
               description)...
             type: string
+          # If this property is referencing location resources available at some other API endpoint,
+          # this should be moved to the relationships field.
           location:
             description: ...tbd (ComplexType property description)...
             type: array
             minItems: 0
             items:
               $ref: '#/definitions/GUIDRefDType'
+          # If this property is referencing an org resource available at some other API endpoint,
+          # this should be moved to the relationships field.
           org:
             $ref: '#/definitions/GUIDRefDType'
+          # If this property is referencing an academicSession resource available at some other API
+          # endpoint, this should be moved to the relationships field.
           academicSession:
-            $ref: '#/definitions/GUIDRefDType'
-          education:
             $ref: '#/definitions/GUIDRefDType'
           registrationStatus:
             description: ...tbd (Enumeration description)...
@@ -856,19 +963,25 @@ definitions:
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        $ref: '#/definitions/EducationOfferingResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            $ref: '#/definitions/EducationOfferingResource'
+      - $ref: '#/definitions/IncludedResources'
   EducationOfferingSetResult:
     type: object
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/EducationOfferingResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/EducationOfferingResource'
+      - $ref: '#/definitions/IncludedResources'
   EducationOfferingPostBody:
     type: object
     required:
@@ -933,6 +1046,26 @@ definitions:
       # metadata -> meta
       meta:
         $ref: '#/definitions/MetadataDType'
+      # educationOffering property moved to relationships field. This allows jsonapi relationships
+      # features such as requesting included resources
+      relationships:
+        type: object
+        properties:
+          educationOffering:
+            type: object
+            properties:
+              links:
+                type: object
+                properties:
+                  related:
+                    type: string
+                    format: uri
+                    example: '{host}{basePath}/educationOfferings/{id}'
+              data:
+                type: object
+                properties:
+                  type: *EducationOfferingType
+                  id: *EducationOfferingId
       attributes:
         type: object
         additionalProperties: false
@@ -947,9 +1080,9 @@ definitions:
             description: Model Primitive Datatype = DateTime. ...tbd (PrimitiveType description)...
             type: string
             format: date-time
+          # If this property is referencing a person resource available at some other API endpoint,
+          # this should be moved to the relationships field.
           personId:
-            $ref: '#/definitions/GUIDRefDType'
-          educationOfferingId:
             $ref: '#/definitions/GUIDRefDType'
           role:
             description: ...tbd (Enumeration description)...
@@ -982,19 +1115,25 @@ definitions:
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        $ref: '#/definitions/OfferingAssociationResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            $ref: '#/definitions/OfferingAssociationResource'
+      - $ref: '#/definitions/IncludedResources'
   OfferingAssociationSetResult:
     type: object
     required:
       - data
     additionalProperties: false
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/OfferingAssociationResource'
+    allOf:
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/definitions/OfferingAssociationResource'
+      - $ref: '#/definitions/IncludedResources'
   OfferingAssociationPostBody:
     type: object
     required:
